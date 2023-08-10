@@ -1,11 +1,11 @@
-package com.karim.corebanking
+package idf.kz.core.banking
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 
 @SpringBootApplication
-class CoreBankingApplication
+class CoreBankingApp
 
 fun main() {
-	runApplication<CoreBankingApplication>()
+  runApplication<CoreBankingApp>()
 }

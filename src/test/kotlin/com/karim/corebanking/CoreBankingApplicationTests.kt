@@ -1,3 +1,0 @@
-package com.karim.corebanking
-
-

@@ -1,1 +1,27 @@
+server:
+  port: 8080
 
+spring:
+  application:
+    name: core-baking
+  flyway:
+    baseline-on-migrate: true
+    password: ${spring.r2dbc.password}
+    user: ${spring.r2dbc.username}
+    url: jdbc:postgresql://localhost:59667/core_banking
+    locations: "classpath:migration"
+    default-schema: accounting
+  jooq.sql-dialect: POSTGRES
+  r2dbc:
+    url: r2dbc:postgresql://localhost:59667/core_banking
+    protocol: r2dbc
+    username: postgres
+    password: postgres
+    properties:
+      applicationName: ${spring.application.name}
+    pool:
+      max-size: 10
+      initial-size: 2
+      max-idle-time: 30s
+      max-life-time: 90s
+      max-create-connection-time: 30s
