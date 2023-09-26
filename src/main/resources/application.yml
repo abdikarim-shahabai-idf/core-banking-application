@@ -9,9 +9,8 @@ spring:
     password: ${spring.r2dbc.password}
     user: ${spring.r2dbc.username}
     url: jdbc:postgresql://localhost:59667/core_banking
-    locations: "classpath:migration"
+    locations: "classpath:model/src/main/migration"
     default-schema: accounting
-  jooq.sql-dialect: POSTGRES
   r2dbc:
     url: r2dbc:postgresql://localhost:59667/core_banking
     protocol: r2dbc
@@ -25,3 +24,9 @@ spring:
       max-idle-time: 30s
       max-life-time: 90s
       max-create-connection-time: 30s
+
+logging:
+  level:
+    org:
+      springframework:
+        r2dbc: DEBUG

@@ -1,13 +1,8 @@
-
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
-repositories { gradlePluginPortal() }
-
-plugins {
-	id("org.springframework.boot") version "3.1.2"
-	id("io.spring.dependency-management") version "1.1.2"
-	kotlin("jvm") version "1.8.22"
-	kotlin("plugin.spring") version "1.8.22"
+repositories {
+	gradlePluginPortal()
+	mavenCentral()
 }
 
 group = "com.karim"
@@ -17,23 +12,32 @@ java {
 	sourceCompatibility = JavaVersion.VERSION_17
 }
 
-repositories {
-	mavenCentral()
+plugins {
+	id("org.springframework.boot") version "3.1.2"
+	id("io.spring.dependency-management") version "1.1.2"
+	kotlin("jvm") version "1.8.22"
+	kotlin("plugin.spring") version "1.8.22"
 }
 
-dependencies {
-	api("org.springframework.boot:spring-boot-starter-jooq")
-	api("org.jooq:jooq")
-	api("org.postgresql:r2dbc-postgresql")
-	api("io.r2dbc:r2dbc-pool")
-	api("io.r2dbc:r2dbc-proxy")
-	implementation ("org.springframework.boot:spring-boot-starter-webflux")
-	implementation ("com.fasterxml.jackson.module:jackson-module-kotlin")
-	implementation ("io.projectreactor.kotlin:reactor-kotlin-extensions")
-	implementation ("org.flywaydb:flyway-core")
+dependencies{
+	implementation("org.springframework.boot:spring-boot-starter")
 	implementation ("org.jetbrains.kotlin:kotlin-reflect")
 	implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-reactor")
+	implementation ("org.springframework.data:spring-data-r2dbc:3.1.4")
+	implementation ("io.projectreactor:reactor-core")
+	implementation ("org.springframework:spring-webflux:6.0.11")
+	implementation ("com.fasterxml.jackson.module:jackson-module-kotlin")
+	implementation ("com.fasterxml.jackson.module:jackson-module-kotlin")
+	implementation ("io.projectreactor.kotlin:reactor-kotlin-extensions")
+	implementation ("org.postgresql:r2dbc-postgresql")
+	implementation ("io.r2dbc:r2dbc-pool")
+	implementation ("io.r2dbc:r2dbc-proxy")
+	implementation ("org.flywaydb:flyway-core")
+	implementation ("org.mapstruct:mapstruct:1.5.3.Final")
+	implementation (project(":core-library"))
+	implementation (project(":model"))
 	runtimeOnly ("org.postgresql:postgresql")
+	compileOnly ("org.projectlombok:lombok:1.18.24")
 	testImplementation ("org.springframework.boot:spring-boot-starter-test")
 	testImplementation ("io.projectreactor:reactor-test")
 }

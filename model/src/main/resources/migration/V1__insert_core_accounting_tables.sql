@@ -1,4 +1,4 @@
-create type finance_type_enum as ENUM ('CREDIT', 'DEPOSIT');
+create type finance_type_enum as ENUM ('CREDIT', 'DEPOSIT', 'ACCOUNT');
 create type agreement_status as ENUM ('ACTIVE', 'CLOSED', 'PENDING');
 
 CREATE TABLE agreement

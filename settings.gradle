@@ -1,2 +1,4 @@
 rootProject.name = 'corebanking'
+include 'core-library'
+include 'model'
 
