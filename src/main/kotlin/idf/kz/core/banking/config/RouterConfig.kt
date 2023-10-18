@@ -28,7 +28,7 @@ class RouterConfig {
       ) { builder: RouterFunctions.Builder ->
         builder
           .GET(PATH_VARIABLE_ID, handler::findAllById)
-          .GET(HandlerFunction<ServerResponse> { serverRequest: ServerRequest? -> handler.findAll() })
+          .GET({ handler.findAll() })
           .PUT(
             PATH_VARIABLE_ID,
             RequestPredicates.accept(MediaType.APPLICATION_JSON),

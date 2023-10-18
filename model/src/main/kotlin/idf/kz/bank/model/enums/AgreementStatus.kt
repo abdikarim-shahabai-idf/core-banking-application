@@ -1,4 +1,4 @@
-package idf.kz.bank.model.enum
+package idf.kz.bank.model.enums
 
 enum class AgreementStatus {
   ACTIVE,

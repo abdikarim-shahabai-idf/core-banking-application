@@ -11,4 +11,5 @@ plugins {
 }
 dependencies{
   implementation ("org.springframework.data:spring-data-r2dbc:3.1.4")
+  compileOnly("org.projectlombok:lombok:1.18.24")
 }

@@ -8,11 +8,11 @@ spring:
     baseline-on-migrate: true
     password: ${spring.r2dbc.password}
     user: ${spring.r2dbc.username}
-    url: jdbc:postgresql://localhost:59667/core_banking
-    locations: "classpath:model/src/main/migration"
+    url: jdbc:postgresql://localhost:5432/core_banking
+    locations: "filesystem:/core-banking-application/model/src/main/resources/db/migration"
     default-schema: accounting
   r2dbc:
-    url: r2dbc:postgresql://localhost:59667/core_banking
+    url: r2dbc:postgresql://localhost:5432/core_banking
     protocol: r2dbc
     username: postgres
     password: postgres
