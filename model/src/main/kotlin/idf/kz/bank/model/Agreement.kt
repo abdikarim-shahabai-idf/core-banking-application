@@ -1,17 +1,25 @@
 package idf.kz.bank.model
 
 import idf.kz.bank.model.enums.AgreementStatus
-import idf.kz.bank.model.enums.FinanceTypeEnum
+import idf.kz.bank.model.enums.FinanceType
+import lombok.Data
+import org.springframework.data.annotation.Id
+import org.springframework.data.relational.core.mapping.Table
 import java.math.BigDecimal
 import java.time.LocalDate
+import java.time.LocalDateTime
 
+@Data
+@Table("agreement")
 data class Agreement (
-   val id: Long,
-   val status: AgreementStatus,
-   val customerId: Long,
-   val dateRequested: LocalDate,
-   val startDate: LocalDate,
-   val endDate: LocalDate,
-   val financeTypeEnum: FinanceTypeEnum,
-   val amount: BigDecimal
+   @Id
+   var id: Long?,
+   var status: AgreementStatus,
+   var customerId: Long,
+   var dateRequested: LocalDateTime,
+   var startDate: LocalDate,
+   var endDate: LocalDate,
+   var financeType: FinanceType,
+   var amount: BigDecimal,
+   var interestRate: BigDecimal
 )

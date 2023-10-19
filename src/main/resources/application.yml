@@ -13,11 +13,11 @@ spring:
     default-schema: accounting
   r2dbc:
     url: r2dbc:postgresql://localhost:5432/core_banking
-    protocol: r2dbc
     username: postgres
     password: postgres
     properties:
       applicationName: ${spring.application.name}
+      schema: accounting
     pool:
       max-size: 10
       initial-size: 2

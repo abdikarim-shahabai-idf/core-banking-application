@@ -11,13 +11,12 @@ import idf.kz.library.service.AbstractService
 import idf.kz.library.service.Service
 import reactor.core.publisher.Flux
 
-
 class DefaultAgreementService(
   private val agreementRepository: AgreementRepository,
-  private val agreementMapper: DefaultAgreementMapper
+  agreementMapper: DefaultAgreementMapper
 ) : AbstractService<AgreementDto, Agreement, AgreementRepository, Mapper<Agreement, AgreementDto>>(
   agreementRepository,
   agreementMapper
 ), Service<AgreementDto>, AgreementService {
-  override fun findByStatus(status: AgreementStatus): Flux<Agreement> =  agreementRepository.findByStatus(status)
+  override fun findByStatus(status: AgreementStatus): Flux<Agreement> = agreementRepository.findByStatus(status)
 }

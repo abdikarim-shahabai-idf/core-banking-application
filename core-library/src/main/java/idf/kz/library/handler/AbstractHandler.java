@@ -5,6 +5,8 @@ import static idf.kz.library.exception.message.MessageResponse.INCORRECT_FIELDS;
 import idf.kz.library.exception.CoreException;
 import idf.kz.library.service.Service;
 import idf.kz.library.util.ReflectionUtil;
+import java.util.logging.LogManager;
+import java.util.logging.Logger;
 import org.springframework.http.MediaType;
 import org.springframework.web.reactive.function.server.ServerRequest;
 import org.springframework.web.reactive.function.server.ServerResponse;
@@ -27,11 +29,14 @@ public abstract class AbstractHandler<
     implements Handler {
 
   protected final S service;
+
+  private final Logger logger;
   private final Class<D> dtoType;
 
   protected AbstractHandler(S service) {
     this.service = service;
     this.dtoType = getClassFromFirstType();
+    logger=  LogManager.getLogManager().getLogger(dtoType.getName());
   }
 
   @Override
@@ -47,9 +52,8 @@ public abstract class AbstractHandler<
             getBadRequestResponseBuilder()
                 .bodyValue(INCORRECT_FIELDS.getDescription())
         )
-        .onErrorResume(exception ->
-            getBadRequestResponseBuilder()
-                .bodyValue(exception.getMessage())
+        .doOnError(exception ->{
+          logger.info(exception.getMessage());}
         );
   }
 

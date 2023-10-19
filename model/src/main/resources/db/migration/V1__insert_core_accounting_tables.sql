@@ -3,7 +3,7 @@ create type agreement_status as ENUM ('ACTIVE', 'CLOSED', 'PENDING');
 
 CREATE TABLE agreement
 (
-    id             INT8 PRIMARY KEY  NOT NULL,
+    id             BIGSERIAL PRIMARY KEY  NOT NULL,
     status         agreement_status  NOT NULL,
     customer_id    INT8              NOT NULL,
     date_requested TIMESTAMP         NOT NULL,
