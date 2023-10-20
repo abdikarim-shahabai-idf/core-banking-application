@@ -37,7 +37,7 @@ public abstract class AbstractService<
   }
 
   @Override
-  public Mono<Void> deleteById(Long id) {
+  public Mono<Void> deleteById(long id) {
     return repository.deleteById(id);
   }
 

@@ -12,7 +12,7 @@ spring:
     locations: "filesystem:/core-banking-application/model/src/main/resources/db/migration"
     default-schema: accounting
   r2dbc:
-    url: r2dbc:postgresql://localhost:5432/core_banking
+#    url: r2dbc:postgresql://localhost:5432/core_banking
     host: localhost
     port: 5432
     database: core_banking
