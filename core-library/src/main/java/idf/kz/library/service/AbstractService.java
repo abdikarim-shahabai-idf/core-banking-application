@@ -37,10 +37,13 @@ public abstract class AbstractService<
   }
 
   @Override
+  public Mono<Void> deleteById(Long id) {
+    return repository.deleteById(id);
+  }
+
+  @Override
   public Mono<D> findById(long id) {
-    return mapper.toDtoMono(
-        repository.findById(id)
-    );
+    return mapper.toDtoMono(repository.findById(id));
   }
 
   @Override
@@ -49,7 +52,5 @@ public abstract class AbstractService<
   }
 
   @Override
-  public Mono<D> update(D dto, long id) {
-    return mapper.toDtoMono(repository.save(mapper.toEntity(dto)));
-  }
+  public abstract Mono<D> update(D dto, long id);
 }

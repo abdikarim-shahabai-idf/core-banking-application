@@ -12,10 +12,8 @@ import reactor.core.publisher.Mono;
 public interface Service<D> {
 
   Mono<D> persist(D dto);
-
+  Mono<Void> deleteById(Long id);
   Mono<D> findById(long id);
-
   Flux<D> findAll();
-
   Mono<D> update(D dto, long id);
 }

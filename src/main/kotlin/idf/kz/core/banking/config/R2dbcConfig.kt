@@ -17,6 +17,14 @@ import org.springframework.data.r2dbc.repository.config.EnableR2dbcRepositories
 @Configuration
 @EnableR2dbcRepositories
 class R2dbcConfig(
+  @Value("\${spring.r2dbc.host}")
+  private val host: String,
+  @Value("\${spring.r2dbc.port}")
+  private val port: Int,
+  @Value("\${spring.r2dbc.database}")
+  private val database: String,
+  @Value("\${spring.r2dbc.schema}")
+  private val schema: String,
   @Value("\${spring.r2dbc.username}")
   private val username: String,
   @Value("\${spring.r2dbc.password}")
@@ -33,13 +41,14 @@ class R2dbcConfig(
   @Bean
   override fun connectionFactory(): ConnectionFactory {
     return PostgresqlConnectionFactory(
-      PostgresqlConnectionConfiguration.builder()
-        .host("localhost")
-        .port(5432)
-        .database("core_banking")
+      PostgresqlConnectionConfiguration
+        .builder()
+        .host(host)
+        .port(port)
         .username(username)
         .password(password)
-        .schema("accounting")
+        .database(database)
+        .schema(schema)
         .codecRegistrar(EnumCodec.builder().withEnum("agreement_status", AgreementStatus::class.java).build())
         .codecRegistrar(EnumCodec.builder().withEnum("finance_type_enum", FinanceType::class.java).build())
         .build()

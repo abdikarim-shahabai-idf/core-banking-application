@@ -6,6 +6,6 @@ import idf.kz.library.handler.AbstractHandler
 import org.springframework.stereotype.Component
 
 @Component
-class AgreementHandler(service: DefaultAgreementService?) : AbstractHandler<AgreementDto,DefaultAgreementService>(
-  service
-)
+class AgreementHandler(service: DefaultAgreementService?) :
+  AbstractHandler<AgreementDto, DefaultAgreementService>(service)
+

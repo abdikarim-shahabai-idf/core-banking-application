@@ -13,4 +13,6 @@ public interface Handler {
   Mono<ServerResponse> findAllById(ServerRequest request);
 
   Mono<ServerResponse> update(ServerRequest request);
+
+  Mono<ServerResponse> deleteById(ServerRequest request);
 }

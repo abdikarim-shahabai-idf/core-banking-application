@@ -18,7 +18,7 @@ import reactor.core.publisher.Mono;
  * It is an abstract class for web layer for interaction with view, that implements the Handler interface and contains
  * all the logic for that duplicated from child classes.
  *
- * @param <D> DTO from Jooq Pojo
+ * @param <D> DTO
  * @param <S> Class that implementations interface Service from module core contains primary logic @see
  * {@link idf.kz.library.service.AbstractService}
  */
@@ -52,8 +52,7 @@ public abstract class AbstractHandler<
             getBadRequestResponseBuilder()
                 .bodyValue(INCORRECT_FIELDS.getDescription())
         )
-        .doOnError(exception ->{
-          logger.info(exception.getMessage());}
+        .doOnError(exception -> logger.info(exception.getMessage())
         );
   }
 
@@ -76,8 +75,12 @@ public abstract class AbstractHandler<
 
   @Override
   public Mono<ServerResponse> findAllById(ServerRequest request) {
-    return createMonoServerResponseFromMono(
-        getIdFromRequest(request).flatMap(service::findById));
+    return createMonoServerResponseFromMono(getIdFromRequest(request).flatMap(service::findById));
+  }
+
+  @Override
+  public Mono<ServerResponse> deleteById(ServerRequest request) {
+    return createMonoServerResponseFromMono(getIdFromRequest(request).flatMap(service::deleteById));
   }
 
   public Mono<ServerResponse> update(ServerRequest request) {

@@ -13,17 +13,18 @@ spring:
     default-schema: accounting
   r2dbc:
     url: r2dbc:postgresql://localhost:5432/core_banking
+    host: localhost
+    port: 5432
+    database: core_banking
+    schema: accounting
     username: postgres
     password: postgres
-    properties:
-      applicationName: ${spring.application.name}
-      schema: accounting
-    pool:
-      max-size: 10
-      initial-size: 2
-      max-idle-time: 30s
-      max-life-time: 90s
-      max-create-connection-time: 30s
+#    pool:
+#      max-size: 10
+#      initial-size: 2
+#      max-idle-time: 30s
+#      max-life-time: 90s
+#      max-create-connection-time: 30s
 
 logging:
   level:

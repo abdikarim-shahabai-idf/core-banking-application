@@ -5,7 +5,6 @@ import idf.kz.library.handler.Handler
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.http.MediaType
-import org.springframework.web.reactive.function.server.RequestPredicate
 import org.springframework.web.reactive.function.server.RequestPredicates
 import org.springframework.web.reactive.function.server.RouterFunction
 import org.springframework.web.reactive.function.server.RouterFunctions
@@ -13,23 +12,20 @@ import org.springframework.web.reactive.function.server.ServerResponse
 
 @Configuration
 class RouterConfig {
-
-  private val ACCEPT_JSON = RequestPredicates.accept(MediaType.APPLICATION_JSON)
-
-  private val PATH_VARIABLE_ID = "{id:[0-9]+}"
-
+  companion object {
+    private val ACCEPT_JSON = RequestPredicates.accept(MediaType.APPLICATION_JSON)
+    private const val AGREEMENT_PATH = "/agreement"
+    private const val PATH_VARIABLE_ID = "{id:[0-9]+}"
+  }
 
   @Bean
   fun agreementRouteFunction(handler: AgreementHandler) =
-    crudRouteFunctions(handler, "/agreement")
+    crudRouteFunctions(handler, AGREEMENT_PATH)
 
-
-  fun crudRouteFunctions(handler: Handler, path: String): RouterFunction<ServerResponse?>? {
+  fun crudRouteFunctions(handler: Handler, path: String): RouterFunction<ServerResponse> {
     return RouterFunctions
       .route()
-      .path(
-        path
-      ) { builder: RouterFunctions.Builder ->
+      .path(path) { builder: RouterFunctions.Builder ->
         builder
           .GET(PATH_VARIABLE_ID, handler::findAllById)
           .GET { handler.findAll() }
@@ -39,24 +35,7 @@ class RouterConfig {
             handler::update
           )
           .POST(ACCEPT_JSON, handler::create)
-      }
-      .build()
-  }
-
-  private fun createRouterFunctionByPath(handler: Handler, path: String): RouterFunction<ServerResponse?>? {
-    return RouterFunctions.route()
-      .path(
-        path
-      ) { builder: RouterFunctions.Builder ->
-        builder
-          .GET(PATH_VARIABLE_ID, handler::findAllById)
-          .GET { handler.findAll() }
-          .POST(ACCEPT_JSON, handler::create)
-      }
-      .build()
-  }
-
-  private fun getRequestPredicate(): RequestPredicate {
-    return RequestPredicates.all()
+          .DELETE(PATH_VARIABLE_ID, handler::deleteById)
+      }.build()
   }
 }
